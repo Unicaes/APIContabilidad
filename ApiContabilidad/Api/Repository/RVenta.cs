@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;
 
 namespace Api.Repository
 {
@@ -26,7 +27,7 @@ namespace Api.Repository
             using (var db = new Model1())
             {
                 db.Configuration.ProxyCreationEnabled = false;
-                return db.Venta.ToList();
+                return db.Venta.Include(d=>d.Cliente).Include(d=>d.Empleado).ToList();
             }
         }
 
@@ -56,7 +57,7 @@ namespace Api.Repository
             }
             resp.fecha = item.fecha;
             resp.id_cliente = item.id_cliente;
-            resp.id_vendedor = item.id_vendedor;
+            resp.id_empleado = item.id_empleado;
             resp.iva = item.iva;
             resp.num_factura = item.num_factura;
             resp.subtotal = item.subtotal;

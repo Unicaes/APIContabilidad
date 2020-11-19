@@ -10,7 +10,6 @@ namespace Api.Controllers
     public class Detalle_VentaController : ApiController
     {
        static readonly IDetalle_Venta c = new RDetalle_Venta();
-        HttpRequestMessage request = new HttpRequestMessage();
         // GET: Detalle_Venta
         
         public HttpResponseMessage Post(Detalle_Venta item)
@@ -18,9 +17,9 @@ namespace Api.Controllers
             item = c.Post(item);
             if (item == null)
             {
-                return request.CreateErrorResponse(HttpStatusCode.NotAcceptable, "Los datos del Detalle_Venta no pueden ser nulos");
+                return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, "Los datos del Detalle_Venta no pueden ser nulos");
             }
-            return request.CreateResponse(HttpStatusCode.Created, item);
+            return Request.CreateResponse(HttpStatusCode.Created, item);
         }
         public HttpResponseMessage GetAll()
         {
@@ -28,9 +27,9 @@ namespace Api.Controllers
             if (items.Count() == 0)
             {
                 //Construyendo respuesta del servidor
-                return request.CreateErrorResponse(HttpStatusCode.NotFound, "No hay registros de Detalle_Ventas");
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No hay registros de Detalle_Ventas");
             }
-            return request.CreateResponse(HttpStatusCode.OK, items);
+            return Request.CreateResponse(HttpStatusCode.OK, items);
         }
         public HttpResponseMessage GetById(int id)
         {
@@ -38,9 +37,9 @@ namespace Api.Controllers
             if (items == null)
             {
                 //Construyendo respuesta del servidor
-                return request.CreateErrorResponse(HttpStatusCode.NotFound, "No hay ningun Detalle_Venta con el id " + id);
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No hay ningun Detalle_Venta con el id " + id);
             }
-            return request.CreateResponse(HttpStatusCode.OK, items);
+            return Request.CreateResponse(HttpStatusCode.OK, items);
         }
         public HttpResponseMessage Delete(int id)
         {
@@ -48,10 +47,10 @@ namespace Api.Controllers
             if (item == null)
             {
                 //Construyendo respuesta del servidor
-                return request.CreateErrorResponse(HttpStatusCode.NotFound, "No hay ningun Detalle_Venta con el id " + id + " para eliminar");
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No hay ningun Detalle_Venta con el id " + id + " para eliminar");
             }
             c.Delete(id);
-            return request.CreateResponse(HttpStatusCode.OK, "El registro ha sido eliminado");
+            return Request.CreateResponse(HttpStatusCode.OK, "El registro ha sido eliminado");
         }
         //Metodo Put
         public HttpResponseMessage Put(int id, Detalle_Venta Detalle_Venta)
@@ -60,14 +59,14 @@ namespace Api.Controllers
             if (item == null)
             {
                 //Construyendo respuesta del servidor
-                return request.CreateErrorResponse(HttpStatusCode.NotFound, "No hay ningun Detalle_Venta con el id " + id + " para actualizar");
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No hay ningun Detalle_Venta con el id " + id + " para actualizar");
             }
             var isPut = c.Put(id, Detalle_Venta);
             if (!isPut)
             {
-                return request.CreateErrorResponse(HttpStatusCode.NotModified, "No ha sido posible la actualizacion");
+                return Request.CreateErrorResponse(HttpStatusCode.NotModified, "No ha sido posible la actualizacion");
             }
-            return request.CreateResponse(HttpStatusCode.OK, "El registro ha sido actualizado");
+            return Request.CreateResponse(HttpStatusCode.OK, "El registro ha sido actualizado");
         }
     }
 }

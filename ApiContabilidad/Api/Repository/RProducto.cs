@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;
 
 namespace Api.Repository
 {
@@ -26,7 +27,7 @@ namespace Api.Repository
             using (var db = new Model1())
             {
                 db.Configuration.ProxyCreationEnabled = false;
-                return db.Producto.ToList();
+                return db.Producto.Include(d=>d.Proveedor).ToList();
             }
         }
 

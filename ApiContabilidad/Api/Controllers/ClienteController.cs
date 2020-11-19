@@ -14,7 +14,6 @@ namespace Api.Controllers
     public class ClienteController : ApiController
     {
         static readonly ICliente c = new RCliente();
-        HttpRequestMessage request = new HttpRequestMessage();
         // GET: Cliente
         
         public HttpResponseMessage Post(Cliente item)
@@ -22,9 +21,9 @@ namespace Api.Controllers
             item = c.Post(item);
             if (item == null)
             {
-                return request.CreateErrorResponse(HttpStatusCode.NotAcceptable, "Los datos del cliente no pueden ser nulos");
+                return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, "Los datos del cliente no pueden ser nulos");
             }
-            return request.CreateResponse(HttpStatusCode.Created, item);
+            return Request.CreateResponse(HttpStatusCode.Created, item);
         }
         public HttpResponseMessage GetAll()
         {
@@ -32,9 +31,9 @@ namespace Api.Controllers
             if (items.Count() == 0)
             {
                 //Construyendo respuesta del servidor
-                return request.CreateErrorResponse(HttpStatusCode.NotFound, "No hay registros de clientes");
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No hay registros de clientes");
             }
-            return request.CreateResponse(HttpStatusCode.OK, items);
+            return Request.CreateResponse(HttpStatusCode.OK, items);
         }
         public HttpResponseMessage GetById(int id)
         {
@@ -42,9 +41,9 @@ namespace Api.Controllers
             if (items == null)
             {
                 //Construyendo respuesta del servidor
-                return request.CreateErrorResponse(HttpStatusCode.NotFound, "No hay ningun cliente con el id " + id);
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No hay ningun cliente con el id " + id);
             }
-            return request.CreateResponse(HttpStatusCode.OK, items);
+            return Request.CreateResponse(HttpStatusCode.OK, items);
         }
         public HttpResponseMessage Delete(int id)
         {
@@ -52,10 +51,10 @@ namespace Api.Controllers
             if (item == null)
             {
                 //Construyendo respuesta del servidor
-                return request.CreateErrorResponse(HttpStatusCode.NotFound, "No hay ningun cliente con el id " + id + " para eliminar");
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No hay ningun cliente con el id " + id + " para eliminar");
             }
             c.Delete(id);
-            return request.CreateResponse(HttpStatusCode.OK, "El registro ha sido eliminado");
+            return Request.CreateResponse(HttpStatusCode.OK, "El registro ha sido eliminado");
         }
         //Metodo Put
         public HttpResponseMessage Put(int id, Cliente cliente)
@@ -64,14 +63,14 @@ namespace Api.Controllers
             if (item == null)
             {
                 //Construyendo respuesta del servidor
-                return request.CreateErrorResponse(HttpStatusCode.NotFound, "No hay ningun cliente con el id " + id + " para actualizar");
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No hay ningun cliente con el id " + id + " para actualizar");
             }
             var isPut = c.Put(id, cliente);
             if (!isPut)
             {
-                return request.CreateErrorResponse(HttpStatusCode.NotModified, "No ha sido posible la actualizacion");
+                return Request.CreateErrorResponse(HttpStatusCode.NotModified, "No ha sido posible la actualizacion");
             }
-            return request.CreateResponse(HttpStatusCode.OK, "El registro ha sido actualizado");
+            return Request.CreateResponse(HttpStatusCode.OK, "El registro ha sido actualizado");
         }
     }
 }

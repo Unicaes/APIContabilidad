@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;
 
 namespace Api.Repository
 {
@@ -26,13 +27,15 @@ namespace Api.Repository
             using (var db = new Model1())
             {
                 db.Configuration.ProxyCreationEnabled = false;
-                return db.Detalle_Compra.ToList();
+                var items = db.Detalle_Compra.Include(d=>d.Producto).Include(d=>d.Compra).ToList();
+                return items;
             }
         }
 
         public Detalle_Compra GetById(int id)
         {
             c.Configuration.ProxyCreationEnabled = false;
+            var item = c.Detalle_Compra.Find(id);
             return c.Detalle_Compra.Find(id);
         }
 

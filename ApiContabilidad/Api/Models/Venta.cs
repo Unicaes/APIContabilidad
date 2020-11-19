@@ -9,6 +9,12 @@ namespace Api.Models
     [Table("Venta")]
     public partial class Venta
     {
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        //public Venta()
+        //{
+        //    Detalle_Venta = new HashSet<Detalle_Venta>();
+        //}
+
         [Key]
         public int id_venta { get; set; }
 
@@ -25,6 +31,13 @@ namespace Api.Models
 
         public int? id_cliente { get; set; }
 
-        public int? id_vendedor { get; set; }
+        public int? id_empleado { get; set; }
+
+        public virtual Cliente Cliente { get; set; }
+
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<Detalle_Venta> Detalle_Venta { get; set; }
+
+        public virtual Empleado Empleado { get; set; }
     }
 }

@@ -20,5 +20,9 @@ namespace Api.Models
         public int? cantidad { get; set; }
 
         public float? monto { get; set; }
+
+        public virtual Producto Producto { get; set; }
+
+        public virtual Venta Venta { get; set; }
     }
 }
