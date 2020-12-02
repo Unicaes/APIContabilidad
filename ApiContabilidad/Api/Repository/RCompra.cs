@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Api.Repository
 {
-    public class RCompra:ICompra
+    public class RCompra:IGeneral<Compra>
     {
         private Model1 c = new Model1();
         public bool Delete(int id)

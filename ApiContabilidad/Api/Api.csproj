@@ -192,6 +192,7 @@
     <Compile Include="Repository\IDetalle_Compra.cs" />
     <Compile Include="Repository\IDetalle_Venta.cs" />
     <Compile Include="Repository\IEmpleado.cs" />
+    <Compile Include="Repository\IGeneral.cs" />
     <Compile Include="Repository\IInventario.cs" />
     <Compile Include="Repository\IProducto.cs" />
     <Compile Include="Repository\IProveedor.cs" />
